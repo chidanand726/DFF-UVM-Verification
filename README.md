@@ -188,6 +188,9 @@ DFF-UVM-Verification
 │   ├── waveform.png
 │   └── functional_coverage.png
 │
+├── .gitignore
+├── LICENSE
+├── README.md
 ├── dff_design.sv
 ├── dff_if.sv
 ├── dff_pkg.sv
@@ -201,10 +204,7 @@ DFF-UVM-Verification
 ├── dff_sb.sv
 ├── dff_test.sv
 ├── dff_top.sv
-├── run.do
-├── README.md
-├── LICENSE
-└── .gitignore
+└── run.do
 ```
 
 ---
