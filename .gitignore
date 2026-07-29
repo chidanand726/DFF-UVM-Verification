@@ -439,3 +439,4 @@ vsim.wlf
 *.qdb
 *.qpg
 *.qtl
+tcl_stacktrace.txt
