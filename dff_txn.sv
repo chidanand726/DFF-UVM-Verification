@@ -1,5 +1,5 @@
-  import uvm_pkg::*;
-    `include "uvm_macros.svh"
+`include "uvm_macros.svh"
+import uvm_pkg::*;
 
 class dff_txn extends uvm_sequence_item;
 

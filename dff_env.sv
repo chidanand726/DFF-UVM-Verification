@@ -1,5 +1,5 @@
-  import uvm_pkg::*;
-    `include "uvm_macros.svh";
+`include "uvm_macros.svh"
+import uvm_pkg::*;
 
 class dff_env extends uvm_env;
 
@@ -20,7 +20,7 @@ class dff_env extends uvm_env;
         agt = dff_agent::type_id::create("agt", this);
         sb  = dff_scoreboard::type_id::create("sb", this);
     endfunction
-//started in the vs code
+
     // Connect phase: connect monitor?s analysis port to scoreboard
     function void connect_phase(uvm_phase phase);
         super.connect_phase(phase);

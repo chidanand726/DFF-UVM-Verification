@@ -1,18 +1,15 @@
 `timescale 1ns/1ps
-
-// Import your testbench package
-import uvm_pkg::*;
 `include "uvm_macros.svh"
+import uvm_pkg::*;
+
 import dff_pkg::*;
 
-
-// ------------------------------------------------------------
 // Top-Level Testbench Module
-// ------------------------------------------------------------
 module dff_top;
 
     // Clock signal
     logic clk;
+ 
     // Instantiate interface and connect to clock
     dff_if dff_vif (clk);
 
@@ -37,9 +34,7 @@ module dff_top;
         dff_vif.rst_n = 1;
     end
 
-    // --------------------------------------------------------
     // UVM Configuration and Test Start
-    // --------------------------------------------------------
     initial begin
         // Set virtual interface for driver and monitor
         uvm_config_db#(virtual dff_if)::set(null, "*", "vif", dff_vif);

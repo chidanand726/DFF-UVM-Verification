@@ -1,14 +1,11 @@
-  import uvm_pkg::*;
-    `include "uvm_macros.svh"
+`include "uvm_macros.svh"
+import uvm_pkg::*;
 
 class dff_driver extends uvm_driver#(dff_txn);
-
     `uvm_component_utils(dff_driver)
 
-    // Virtual interface handle
     virtual dff_if vif;
 
-    // Constructor
     function new(string name = "dff_driver", uvm_component parent = null);
         super.new(name, parent);
     endfunction
@@ -20,11 +17,8 @@ class dff_driver extends uvm_driver#(dff_txn);
     endfunction
 
     // Main driving logic
-
     task run_phase(uvm_phase phase);
-
     dff_txn tx;
-
     vif.drv_cb.d <= 0;
     @(vif.drv_cb);
 
@@ -40,11 +34,7 @@ class dff_driver extends uvm_driver#(dff_txn);
 
         seq_item_port.item_done();
 
-        `uvm_info(get_type_name(),
-                  $sformatf("Driven D=%0b Expected=%0b",
-                  tx.d,
-                  tx.q),
-                  UVM_LOW)
+        `uvm_info(get_type_name(),$sformatf("Driven D=%0b Expected=%0b",tx.d,tx.q),UVM_LOW)
 
         end
 

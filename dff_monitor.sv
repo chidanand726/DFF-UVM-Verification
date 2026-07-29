@@ -14,22 +14,15 @@ class dff_monitor extends uvm_component;
     // Transaction Handle
     dff_txn tx;
 
-    //--------------------------------------------------------
     // Coverage Variables
-    //--------------------------------------------------------
-
     bit d_cov;
     bit q_cov;
     bit rst_cov;
 
-    //--------------------------------------------------------
     // Functional Coverage
-    //--------------------------------------------------------
-
     covergroup dff_cg;
-
-    option.per_instance = 1;
-    option.name = "DFF_Functional_Coverage";
+        option.per_instance = 1;
+        option.name = "DFF_Functional_Coverage";
 
     // Reset Coverage
     cp_rst : coverpoint rst_cov
@@ -64,60 +57,37 @@ class dff_monitor extends uvm_component;
     // Cross Coverage: Reset and D
     rst_d_cross : cross cp_rst, cp_d
     {
-        bins rst0_d0 = binsof(cp_rst.reset_asserted)   &&
-                       binsof(cp_d.d_zero);
+        bins rst0_d0 = binsof(cp_rst.reset_asserted) && binsof(cp_d.d_zero);
 
-        bins rst0_d1 = binsof(cp_rst.reset_asserted)   &&
-                       binsof(cp_d.d_one);
+        bins rst0_d1 = binsof(cp_rst.reset_asserted) && binsof(cp_d.d_one);
 
-        bins rst1_d0 = binsof(cp_rst.reset_deasserted) &&
-                       binsof(cp_d.d_zero);
+        bins rst1_d0 = binsof(cp_rst.reset_deasserted) && binsof(cp_d.d_zero);
 
-        bins rst1_d1 = binsof(cp_rst.reset_deasserted) &&
-                       binsof(cp_d.d_one);
+        bins rst1_d1 = binsof(cp_rst.reset_deasserted) && binsof(cp_d.d_one);
     }
 
     endgroup
 
-    //--------------------------------------------------------
     // Constructor
-    //--------------------------------------------------------
-
-    function new(string name = "dff_monitor",
-                 uvm_component parent = null);
-
+    function new(string name = "dff_monitor",uvm_component parent = null);
         super.new(name, parent);
-
         mon_ap = new("mon_ap", this);
-
         // Create covergroup
         dff_cg = new();
-
     endfunction
 
-    //--------------------------------------------------------
     // Build Phase
-    //--------------------------------------------------------
-
     function void build_phase(uvm_phase phase);
-
         super.build_phase(phase);
-
         if(!uvm_config_db#(virtual dff_if)::get(this, "", "vif", vif))
             `uvm_fatal("NOVIF", "Virtual Interface Not Found")
-
     endfunction
 
-    //--------------------------------------------------------
     // Run Phase
-    //--------------------------------------------------------
-
     task run_phase(uvm_phase phase);
 
         forever begin
-
             @(vif.mon_cb);
-
             tx = dff_txn::type_id::create("tx");
 
             // Sample DUT signals
@@ -134,11 +104,7 @@ class dff_monitor extends uvm_component;
 
             // Send transaction to scoreboard
             mon_ap.write(tx);
-
             `uvm_info(get_type_name(),$sformatf("MON : D=%0b Q=%0b RST=%0b",tx.d,tx.q,vif.mon_cb.rst_n),UVM_LOW)
-
         end
-
     endtask
-
 endclass

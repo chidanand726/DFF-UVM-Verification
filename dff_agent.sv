@@ -1,8 +1,7 @@
-  import uvm_pkg::*;
-    `include "uvm_macros.svh"
+`include "uvm_macros.svh"
+import uvm_pkg::*;
 
 class dff_agent extends uvm_agent;
-
     `uvm_component_utils(dff_agent)
 
     // Agent sub-components
@@ -21,7 +20,7 @@ class dff_agent extends uvm_agent;
     // Build phase: Create components and get virtual interface
     function void build_phase(uvm_phase phase);
         if (!uvm_config_db#(virtual dff_if)::get(this, "", "vif", vif))
-            `uvm_fatal("NOVIF", "Virtual interface not found! Did you set it in tb_top?")
+            `uvm_fatal("NO_VIF", "Virtual interface not found! Did you set it in tb_top?")
 
         // Create components
         drv  = dff_driver::type_id::create("drv", this);
