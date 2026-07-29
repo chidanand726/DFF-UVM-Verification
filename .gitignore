@@ -427,3 +427,15 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# QuestaSim / ModelSim
+work/
+transcript
+vsim.wlf
+*.ucdb
+*.wlf
+*.mti
+*.mpf
+*.qdb
+*.qpg
+*.qtl
