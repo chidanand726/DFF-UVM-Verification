@@ -17,6 +17,12 @@ class dff_test extends uvm_test;
         env = dff_env::type_id::create("env", this);
     endfunction
 
+    // End of Elaboration Phase
+    function void end_of_elaboration_phase(uvm_phase phase);
+        super.end_of_elaboration_phase(phase);
+        uvm_top.print_topology();
+    endfunction
+
     // Run phase
     task run_phase(uvm_phase phase);
         dff_seq seq;
@@ -30,11 +36,6 @@ class dff_test extends uvm_test;
         #100ns;
         phase.drop_objection(this);
     endtask
-
-    function void end_of_elaboration_phase(uvm_phase phase);
-        super.end_of_elaboration_phase(phase);
-        uvm_top.print_topology();
-    endfunction
 
 endclass
 
